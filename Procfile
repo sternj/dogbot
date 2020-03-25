@@ -1,2 +1,2 @@
-worker: python run.py
-flask: gunicorn flaskapp:app
+discord: python run.py
+worker: gunicorn flaskapp:app
