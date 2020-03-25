@@ -6,10 +6,8 @@ from typing import List
 def put_text(use_bottom):
     img = get_random_image()
     joke = get_joke_of_right_length()
-    
-
     write_on_image(img, joke, use_bottom=use_bottom)
-    img.save('text.jpg')
+    return img
 
 def write_on_image(image: Image, text: List[str], use_bottom=True):
     top, bottom = text
@@ -19,7 +17,6 @@ def write_on_image(image: Image, text: List[str], use_bottom=True):
         fontSize -= 1
         font, topsize, bottomsize = update_font(fontSize, top, bottom)
     color = (0,0,0)
-    print(brightness(image))
     if brightness(image) < 130:
         color = (255, 255, 255)
     draw = ImageDraw.Draw(image)
