@@ -18,9 +18,9 @@ def write_on_image(image: Image, text: List[str], use_bottom=True, strokewidth=2
         font, topsize, bottomsize = update_font(fontSize, top, bottom, strokewidth)
     color = (255, 255, 255)
     draw = ImageDraw.Draw(image)
-    draw.text((image.size[0] / 2 - topsize / 2,10), top, font=font, fill=color, stroke_width=strokewidth)
+    draw.text((image.size[0] / 2 - topsize / 2,10), top, font=font, fill=color, stroke_width=strokewidth, stroke_fill=(0,0,0))
     if use_bottom:
-        draw.text((image.size[0]/2 - bottomsize / 2, image.size[1]-10-fontSize), bottom, font=font, fill=color, stroke_width=strokewidth)
+        draw.text((image.size[0]/2 - bottomsize / 2, image.size[1]-10-fontSize), bottom, font=font, fill=color, stroke_width=strokewidth, stroke_fill=(0,0,0))
 
 def update_font(fontsize, top, bottom, strokewidth):
     font = ImageFont.truetype("./Impact.ttf", fontsize)
