@@ -1,2 +1,2 @@
 worker: python run.py
-worker: gunicorn flaskapp:app
+flask: gunicorn flaskapp:app
