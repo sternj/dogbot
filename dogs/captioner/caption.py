@@ -9,25 +9,23 @@ def put_text(use_bottom):
     write_on_image(img, joke, use_bottom=use_bottom)
     return img
 
-def write_on_image(image: Image, text: List[str], use_bottom=True):
+def write_on_image(image: Image, text: List[str], use_bottom=True, strokewidth=2):
     top, bottom = text
     fontSize = int(image.size[1]/5)
-    font, topsize, bottomsize = update_font(fontSize, top, bottom)
+    font, topsize, bottomsize = update_font(fontSize, top, bottom, strokewidth)
     while topsize > image.size[0] - 20 or (bottomsize > image.size[0] - 20 and use_bottom):
         fontSize -= 1
-        font, topsize, bottomsize = update_font(fontSize, top, bottom)
-    color = (0,0,0)
-    if brightness(image) < 130:
-        color = (255, 255, 255)
+        font, topsize, bottomsize = update_font(fontSize, top, bottom, strokewidth)
+    color = (255, 255, 255)
     draw = ImageDraw.Draw(image)
-    draw.text((image.size[0] / 2 - topsize / 2,10), top, font=font, fill=color)
+    draw.text((image.size[0] / 2 - topsize / 2,10), top, font=font, fill=color, stroke_width=strokewidth)
     if use_bottom:
-        draw.text((image.size[0]/2 - bottomsize / 2, image.size[1]-10-fontSize), bottom, font=font, fill=color)
+        draw.text((image.size[0]/2 - bottomsize / 2, image.size[1]-10-fontSize), bottom, font=font, fill=color, stroke_width=strokewidth)
 
-def update_font(fontsize, top, bottom):
+def update_font(fontsize, top, bottom, strokewidth):
     font = ImageFont.truetype("./Impact.ttf", fontsize)
-    topSize = font.getsize(top)
-    bottomSize = font.getsize(bottom)
+    topSize = font.getsize(top, stroke_width=strokewidth)
+    bottomSize = font.getsize(bottom, stroke_width=strokewidth)
     return font, topSize[0], bottomSize[0]
 
 def brightness(image):
