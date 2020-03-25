@@ -13,3 +13,4 @@ def get_joke_of_right_length() -> List[str]:
         tok_joke = sent_tokenize(' '.join(joke.split()))
         if len(tok_joke) == 2:
             return tok_joke
+            
