@@ -4,13 +4,15 @@
         <div class="col">
             <h1> DOGBOT </h1>
         </div>
-        
     </div>
     <div class="row">
         <div style="width: 100%" class="col">
-            <img src="/dog" style="width: 45%; height: auto;"></img>
+            <img id="dog-img" style="width: 45%; height: auto;"></img>
         </div>
     </div>
     
 </div>
 
+<script>
+    document.getElementById("dog-img").src = "/dog?" + (new Date()).getTime()
+</script>
