@@ -9,6 +9,10 @@ def put_text(use_bottom):
     write_on_image(img, joke, use_bottom=use_bottom)
     return img
 
+# These next two functions are roughly based on lines 19-35 of this file:
+# https://github.com/danieldiekmeier/memegenerator/blob/master/memegenerator.py
+# 
+# I did some slight restructuring because I wasn't satisfied with that long while loop
 def write_on_image(image: Image, text: List[str], use_bottom=True, strokewidth=2):
     top, bottom = text
     fontSize = int(image.size[1]/5)
@@ -23,12 +27,10 @@ def write_on_image(image: Image, text: List[str], use_bottom=True, strokewidth=2
         draw.text((image.size[0]/2 - bottomsize / 2, image.size[1]-10-fontSize), bottom, font=font, fill=color, stroke_width=strokewidth, stroke_fill=(0,0,0))
 
 def update_font(fontsize, top, bottom, strokewidth):
+    # Unfortunately, based on these docs https://pillow.readthedocs.io/en/3.1.x/reference/ImageFont.html#methods,
+    # there's no way to pre-cache this file to reduce loads from the filesystem
+    # or to resize this font
     font = ImageFont.truetype("./Impact.ttf", fontsize)
     topSize = font.getsize(top, stroke_width=strokewidth)
     bottomSize = font.getsize(bottom, stroke_width=strokewidth)
     return font, topSize[0], bottomSize[0]
-
-def brightness(image):
-   im = image.convert('L')
-   stat = ImageStat.Stat(im)
-   return stat.rms[0]
