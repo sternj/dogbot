@@ -1,6 +1,7 @@
 from flask import Flask, send_file, render_template
 import io
 import nltk
+import os
 from dogs.captioner import caption
 app = Flask(__name__)
 
@@ -19,3 +20,10 @@ def send_dog():
 @app.before_first_request
 def download_punkt():
     nltk.download('punkt')
+
+
+# NOTE: derived from https://flask.palletsprojects.com/en/master/server/
+if __name__ == "__main__":
+    print(__file__)
+    os.chdir('/home/sam/Projects/code/dogbot')
+    app.run(debug=True)
